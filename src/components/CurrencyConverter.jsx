@@ -128,11 +128,11 @@ const CurrencyConverter = () => {
           <button
             type="submit"
             onClick={handleFormSubmit}
-            className="btn-primary">
+            className="btn-primary btn-submit">
             Find rate
           </button>
 
-          <button className="btn-primary" onClick={handleResetInputs}>
+          <button className="btn-primary btn-reset" onClick={handleResetInputs}>
             Reset
           </button>
         </div>
