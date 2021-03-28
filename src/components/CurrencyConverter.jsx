@@ -107,6 +107,7 @@ const CurrencyConverter = () => {
 
   return (
     <>
+      <h1 className="title">Currency Converter</h1>
       <form className="currency-form">
         <ConverterRow
           stateParam={sourceCurrency}
