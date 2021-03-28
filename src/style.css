@@ -1,7 +1,5 @@
 @import url(//db.onlinewebfonts.com/c/1db29588408eadbd4406aae9238555eb?family=Consolas);
 
-
-
 html,
 body {
   width: 100%;
@@ -15,6 +13,12 @@ body {
   background-color: #f8f8f8;
   display: flex;
   justify-items: center;
+}
+
+/* modded to have the ph be toned-down */
+::placeholder {
+  color: lightgray;
+  opacity: 1; 
 }
 
 .title {
