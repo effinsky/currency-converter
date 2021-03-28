@@ -79,7 +79,7 @@ const CurrencyConverter = () => {
   const handleDateChange = e => {
     e.persist()
     setFormSubmitted(false)
-    const newDate = formatDate(e.target.value)
+    const newDate = formatDate(e.target.value, e)
     setCurrencyDate(newDate)
   }
 
