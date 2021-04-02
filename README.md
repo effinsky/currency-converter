@@ -7,12 +7,12 @@ This section outlines the requirements which your component should adhere to in 
 ## HTML elements
 Ensure that the CurrencyConverter component renders the following elements, which will be used by the test suite:
 
-<input class="currency-source" />: an input field for the user to enter the 3-digit source (base) currency symbol.
-<input class="currency-destination" />: an input field for the user to enter the 3-digit destination currency symbol.
-<input class="currency-date" />: an input field for the user to enter the 10-digit date for the desired conversion rate.
-<button class="find-rate">: a button which enables the user to submit a conversion rate request.
-<button class="reset-fields">: a button which enables the user to clear all of the input fields along with the result element and reset the app to its original state. No other button click should result in the fields being cleared.
-<div class="conversion-result">: an element to show the result of the request. On success, the conversion rate returned by the API will be shown, otherwise, this box will contain an error message for the user (decribed below).
+- `<input class="currency-source" />`: an input field for the user to enter the 3-digit source (base) currency symbol.
+- `<input class="currency-destination" />`: an input field for the user to enter the 3-digit destination currency symbol.
+- `<input class="currency-date" />`: an input field for the user to enter the 10-digit date for the desired conversion rate.
+- `<button class="find-rate">`: a button which enables the user to submit a conversion rate request.
+- `<button class="reset-fields">`: a button which enables the user to clear all of the input fields along with the result element and reset the app to its original state. No other button click should result in the fields being cleared.
+- `<div class="conversion-result">`: an element to show the result of the request. On success, the conversion rate returned by the API will be shown, otherwise, this box will contain an error message for the user (decribed below).
 Note that these elements will be called by class name, so their type is flexible as long as they respond to click and onChange events. Please view the Enzyme test suite to determine exactly the way in which the DOM will be accessed.
 
 ### Input validation
@@ -32,3 +32,12 @@ Otherwise, if a request to the API is successful, the "rates" key will be set on
 For this challenge, use axios for making requests. The test suite will use a mocked version of axios to validate your code's behavior. How the test suite does this and the definition of the mock are available to you in the project folder under __mocks__ and __tests__. Most relevantly, only the axios.get method is made available.
 
 No key is necessary to access the API. Since we're using a public API, please respect rate limits to the extent you can. In the rare event that the API is unavailable, use the sample data in the provided tests and the mocked axios object to simulate calls to the API (response JSON in the testing suite shows example URIs). Since the tests don't call the API, the challenge is completable.
+
+---
+
+# Demo
+
+Here's a screen capture showing the app's functionality. Style is up to you.
+---
+
+![Currency Converter](./assets.ccdemo.gif)
