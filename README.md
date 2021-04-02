@@ -36,7 +36,6 @@ No key is necessary to access the API. Since we're using a public API, please re
 ---
 
 # Demo
-
 Here's a screen capture showing the app's functionality. Style is up to you.
 ---
 
