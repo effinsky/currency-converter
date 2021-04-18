@@ -48,7 +48,7 @@ body {
   width: 12ch;
 }
 
-.conversion-result {
+.conversion-result-control {
   font-size: 1.2rem;
   font-family: inherit;
   text-align: start;
@@ -63,4 +63,15 @@ body {
 /* overriding general button margin */
 .btn-submit {
   margin-left: 0;
+}
+
+.disclaimer-container {
+  width: 350px;
+  font-size: 0.8rem;
+  margin-left: 2rem;
+}
+
+.disclaimer-heading {
+  width: inherit;
+  text-align: left;
 }

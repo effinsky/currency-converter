@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { formatCurrency, formatDate } from "../inputFormatters"
 import ConverterRow from "./ConverterRow"
+import ConversionResult from "./ConversionResult"
 
 const initialRowsInfo = [
   {
@@ -9,22 +10,22 @@ const initialRowsInfo = [
     className: "currency-source",
     placeHolder: "USD",
     tag: "Source symbol",
-    type: "text"
+    type: "text",
   },
   {
     id: "currency-destination",
     className: "currency-destination",
     placeHolder: "EUR",
     tag: "Destination symbol",
-    type: "text"
+    type: "text",
   },
   {
     id: "currency-date",
     className: "currency-date",
     placeHolder: "YYYY-MM-DD",
     tag: "Date",
-    type: "text"
-  }
+    type: "text",
+  },
 ]
 
 const CurrencyConverter = () => {
@@ -33,7 +34,7 @@ const CurrencyConverter = () => {
   const [targetCurrency, setTargetCurrency] = useState("")
   const [currencyDate, setCurrencyDate] = useState("")
   const [showClientValidationError, setShowClientValidationError] = useState(
-    false
+    false,
   )
   const [conversionResult, setConversionResult] = useState("")
   // call API only if form submitted
@@ -43,16 +44,21 @@ const CurrencyConverter = () => {
     setShowClientValidationError(false)
 
     try {
-      // found this endpoint in the test file
-      const URL = `https://api.exchangeratesapi.io/${currencyDate}?base=${sourceCurrency}&symbols=${targetCurrency}`
+      const URL = `https://api.exchangerate.host/${currencyDate}?base=${sourceCurrency}&symbols=${targetCurrency}`
 
       const {
-        data: { rates }
+        data: { rates },
       } = await axios.get(URL)
       const exchangeRate = rates[targetCurrency]
+
+      // some forced error handling, since the API I moved to has hardly any error
+      // handling of its own
+      if (!exchangeRate) {
+        throw new Error("API has no result. Check your inputs")
+      }
       setConversionResult(exchangeRate)
     } catch (err) {
-        setConversionResult(err.response.data.error)
+      setConversionResult("Error unhandled by the API")
     }
   }
 
@@ -79,7 +85,7 @@ const CurrencyConverter = () => {
   const handleDateChange = e => {
     e.persist()
     setFormSubmitted(false)
-    const newDate = formatDate(e.target.value, e)
+    const newDate = formatDate(e.target.value)
     setCurrencyDate(newDate)
   }
 
@@ -128,7 +134,8 @@ const CurrencyConverter = () => {
           <button
             type="submit"
             onClick={handleFormSubmit}
-            className="btn-primary btn-submit">
+            className="btn-primary btn-submit"
+          >
             Find rate
           </button>
 
@@ -137,12 +144,11 @@ const CurrencyConverter = () => {
           </button>
         </div>
       </form>
-      <div className="conversion-result">
-        {showClientValidationError
-          ? "Please complete each field"
-          : conversionResult
-          ? conversionResult
-          : null}
+      <div className="conversion-result-control">
+        <ConversionResult
+          showClientValidationError={showClientValidationError}
+          conversionResult={conversionResult}
+        />
       </div>
     </>
   )
