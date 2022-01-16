@@ -1,6 +1,6 @@
 import React from "react";
 
-const Disclaimer = () => {
+export const Disclaimer = () => {
     return (
         <div className="disclaimer-container">
             <h3 className="disclaimer-heading">Disclaimer</h3>
@@ -34,4 +34,3 @@ const Disclaimer = () => {
         </div>
     );
 };
-export default Disclaimer;

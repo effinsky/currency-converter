@@ -1,6 +1,16 @@
 import React from "react";
 
-const ConverterRow = ({
+interface ConverterRowProps {
+    id: string;
+    type: string;
+    className: string;
+    placeholder: string;
+    stateParam: string;
+    handleStateParamChange: React.EventHandler<React.ChangeEvent>;
+    tag: string;
+}
+
+export const ConverterRow = ({
     id,
     type,
     className,
@@ -8,7 +18,7 @@ const ConverterRow = ({
     stateParam,
     handleStateParamChange,
     tag,
-}) => {
+}: ConverterRowProps) => {
     return (
         <div className="form-control">
             <label htmlFor="currency-destination">{tag}</label>
@@ -23,5 +33,3 @@ const ConverterRow = ({
         </div>
     );
 };
-
-export default ConverterRow;

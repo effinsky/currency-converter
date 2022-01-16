@@ -1,13 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import axios from "axios";
-import {formatCurrency, formatDate} from "../../inputFormatters";
-import ConverterRow from "../ConverterRow";
+import {formatCurrency, formatDate} from "../../utils/inputFormatters";
+import {ConverterRow} from "../ConverterRow";
 import ConversionResult from "../ConversionResult";
-import {initialRowsInfo} from "../../assets/data";
 import {useCurrencyConverterReducer} from "./currencyConverterReducer";
 
-const CurrencyConverter = () => {
-    // move all local state to reducer
+export const CurrencyConverter = () => {
     const [
         {
             rowsInfo,
@@ -28,7 +26,7 @@ const CurrencyConverter = () => {
     }, [formSubmitted]);
 
     const getExchangeRate = async () => {
-        setShowClientValidationError(false);
+        dispatch({type: "SET_SHOW_CLIENT_VALIDATION_ERROR", payload: false});
 
         try {
             const URL = `https://api.exchangerate.host/${currencyDate}?base=${sourceCurrency}&symbols=${targetCurrency}`;
@@ -43,36 +41,38 @@ const CurrencyConverter = () => {
             if (!exchangeRate) {
                 throw new Error("API has no result. Check your inputs");
             }
-            setConversionResult(exchangeRate);
+            dispatch({type: "SET_CONVERSION_RESULT", payload: exchangeRate});
         } catch (err) {
-            setConversionResult("Error unhandled by the API");
+            dispatch({
+                type: "SET_CONVERSION_RESULT",
+                payload: "Error unhandled by the API",
+            });
         }
     };
 
-    const handleSourceChange = (e: any) => {
+    const handleSourceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.persist();
         dispatch({type: "SET_FORM_SUBMITTED", payload: false});
         const newSrc = formatCurrency(e.target.value);
         dispatch({type: "SET_SOURCE_CURRENCY", payload: newSrc});
     };
 
-    const handleTargetChange = (e: any) => {
+    const handleTargetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.persist();
-        setFormSubmitted(false);
-        const newTrg = formatCurrency(e.target.value);
-        setTargetCurrency(newTrg);
+        dispatch({type: "SET_FORM_SUBMITTED", payload: false});
+        const newTgt = formatCurrency(e.target.value);
+        dispatch({type: "SET_TARGET_CURRENCY", payload: newTgt});
     };
 
-    const handleDateChange = (e: any) => {
+    const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.persist();
         dispatch({type: "SET_FORM_SUBMITTED", payload: false});
         const newDate = formatDate(e.target.value);
         dispatch({type: "SET_CURRENCY_DATE", payload: newDate});
     };
 
-    const handleFormSubmit = (e: any) => {
+    const handleFormSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        // last-ditch frontend validation on all inputs
         if (
             sourceCurrency.length < 3 ||
             targetCurrency.length < 3 ||
@@ -138,5 +138,3 @@ const CurrencyConverter = () => {
         </>
     );
 };
-
-export default CurrencyConverter;
