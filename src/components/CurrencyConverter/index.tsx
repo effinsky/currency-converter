@@ -4,6 +4,7 @@ import {formatCurrency, formatDate} from "../../utils/inputFormatters";
 import {ConverterRow} from "../ConverterRow";
 import ConversionResult from "../ConversionResult";
 import {useCurrencyConverterReducer} from "./currencyConverterReducer";
+import {ButtonControls} from "../ButtonControls";
 
 export const CurrencyConverter = () => {
     const [
@@ -111,23 +112,10 @@ export const CurrencyConverter = () => {
                     handleStateParamChange={handleDateChange}
                     {...rowsInfo[2]}
                 />
-                {/* TODO: move to separate button section */}
-                <section className="buttons">
-                    <button
-                        type="submit"
-                        onClick={handleFormSubmit}
-                        className="btn-primary btn-submit"
-                    >
-                        Find rate
-                    </button>
-
-                    <button
-                        className="btn-primary btn-reset"
-                        onClick={handleResetInputs}
-                    >
-                        Reset
-                    </button>
-                </section>
+                <ButtonControls
+                    onSubmit={handleFormSubmit}
+                    onResetInputs={handleResetInputs}
+                />
             </form>
             <div className="conversion-result-control">
                 <ConversionResult
