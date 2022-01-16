@@ -111,7 +111,7 @@ const CurrencyConverter = () => {
                     handleStateParamChange={handleDateChange}
                     {...rowsInfo[2]}
                 />
-                {/* move to separate button section */}
+                {/* TODO: move to separate button section */}
                 <section className="buttons">
                     <button
                         type="submit"
