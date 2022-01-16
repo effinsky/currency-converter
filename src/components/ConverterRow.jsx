@@ -1,27 +1,27 @@
-import React from "react"
+import React from "react";
 
 const ConverterRow = ({
-  id,
-  type,
-  className,
-  placeHolder,
-  stateParam,
-  handleStateParamChange, 
-  tag
+    id,
+    type,
+    className,
+    placeholder,
+    stateParam,
+    handleStateParamChange,
+    tag,
 }) => {
-  return (
-    <div className="form-control">
-      <label htmlFor="currency-destination">{tag}</label>
-      <input
-        type={type}
-        id={id}
-        className={className}
-        placeholder={placeHolder}
-        value={stateParam}
-        onChange={handleStateParamChange}
-      />
-    </div>
-  )
-}
+    return (
+        <div className="form-control">
+            <label htmlFor="currency-destination">{tag}</label>
+            <input
+                type={type}
+                id={id}
+                className={className}
+                placeholder={placeholder}
+                value={stateParam}
+                onChange={handleStateParamChange}
+            />
+        </div>
+    );
+};
 
-export default ConverterRow
+export default ConverterRow;
