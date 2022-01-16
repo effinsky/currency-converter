@@ -6,6 +6,13 @@ import ConversionResult from "../ConversionResult";
 import {useCurrencyConverterReducer} from "./currencyConverterReducer";
 import {ButtonControls} from "../ButtonControls";
 
+const formatURL = (
+    currencyDate: string,
+    sourceCurrency: string,
+    targetCurrency: string
+) =>
+    `https://api.exchangerate.host/${currencyDate}?base=${sourceCurrency}&symbols=${targetCurrency}`;
+
 export const CurrencyConverter = () => {
     const [
         {
@@ -30,11 +37,11 @@ export const CurrencyConverter = () => {
         dispatch({type: "SET_SHOW_CLIENT_VALIDATION_ERROR", payload: false});
 
         try {
-            const URL = `https://api.exchangerate.host/${currencyDate}?base=${sourceCurrency}&symbols=${targetCurrency}`;
-
             const {
                 data: {rates},
-            } = await axios.get(URL);
+            } = await axios.get(
+                formatURL(currencyDate, sourceCurrency, targetCurrency)
+            );
             const exchangeRate = rates[targetCurrency];
 
             // some forced error handling, since the API I moved to has hardly any error
